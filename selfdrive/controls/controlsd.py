@@ -506,7 +506,7 @@ class Controls:
     # Nelson's hack for personal branch to preserve engine braking in Corolla
     # Setting speed may be iffy still
     if self.v_cruise_kph != 255:
-      controlsState.vCruise = controlsState.vCruise * 1.017
+      controlsState.vCruise = controlsState.vCruise * 0.974
 
     if self.CP.lateralTuning.which() == 'pid':
       controlsState.lateralControlState.pidState = lac_log
