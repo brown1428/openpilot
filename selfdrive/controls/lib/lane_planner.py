@@ -3,7 +3,7 @@ import numpy as np
 from cereal import log
 from selfdrive.controls.lib.dynamic_camera_offset import DynamicCameraOffset
 
-STANDARD_CAMERA_OFFSET = 0.06  # m from center car to camera (DO NOT CHANGE THIS)
+STANDARD_CAMERA_OFFSET = 0.045  # m from center car to camera (DO NOT CHANGE THIS)
 
 
 def compute_path_pinv(length=50):
