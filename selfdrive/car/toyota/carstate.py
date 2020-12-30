@@ -92,12 +92,15 @@ class CarState(CarStateBase):
       ret.cruiseState.standstill = False
     else:
       ret.cruiseState.standstill = self.pcm_acc_status == 7
-    ret.cruiseState.enabled = bool(cp.vl["PCM_CRUISE"]['CRUISE_ACTIVE'])
+    #ret.cruiseState.enabled = bool(cp.vl["PCM_CRUISE"]['CRUISE_ACTIVE'])
+    ret.cruiseState.enabled = bool(cp.vl["ACC_CONTROL"]['DISTANCE'])
     # TODO: CRUISE_STATE is a 4 bit signal, find any other non-adaptive cruise states
     ret.cruiseState.nonAdaptive = cp.vl["PCM_CRUISE"]['CRUISE_STATE'] in [5]
 
     if self.CP.carFingerprint == CAR.PRIUS:
       ret.genericToggle = cp.vl["AUTOPARK_STATUS"]['STATE'] != 0
+    elif self.CP.carFingerprint == CAR.LEXUS_RX_TSS2:
+      ret.genericToggle = cp.vl["ACC_CONTROL"]['DISTANCE'] != 0
     else:
       ret.genericToggle = bool(cp.vl["LIGHT_STALK"]['AUTO_HIGH_BEAM'])
     ret.stockAeb = bool(cp_cam.vl["PRE_COLLISION"]["PRECOLLISION_ACTIVE"] and cp_cam.vl["PRE_COLLISION"]["FORCE"] < -1e-5)
@@ -143,6 +146,7 @@ class CarState(CarStateBase):
       ("LKA_STATE", "EPS_STATUS", 0),
       ("BRAKE_LIGHTS_ACC", "ESP_CONTROL", 0),
       ("AUTO_HIGH_BEAM", "LIGHT_STALK", 0),
+      ("DISTANCE", "ACC_CONTROL", 0),
     ]
 
     checks = [
