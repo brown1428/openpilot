@@ -99,7 +99,7 @@ class CarState(CarStateBase):
     if self.CP.carFingerprint == CAR.PRIUS:
       ret.genericToggle = cp.vl["AUTOPARK_STATUS"]['STATE'] != 0
     elif self.CP.carFingerprint == CAR.LEXUS_RX_TSS2:
-      ret.genericToggle = cp.vl["ACC_CONTROL"]['DISTANCE'] != 0
+      ret.genericToggle = bool(cp.vl["ACC_CONTROL"]['DISTANCE'])
     else:
       ret.genericToggle = bool(cp.vl["LIGHT_STALK"]['AUTO_HIGH_BEAM'])
     ret.stockAeb = bool(cp_cam.vl["PRE_COLLISION"]["PRECOLLISION_ACTIVE"] and cp_cam.vl["PRE_COLLISION"]["FORCE"] < -1e-5)
