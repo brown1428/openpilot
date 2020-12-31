@@ -123,7 +123,8 @@ class PathPlanner():
         torque_applied = True
 
       blindspot_detected = ((sm['carState'].leftBlindspot and self.lane_change_direction == LaneChangeDirection.left) or
-                            (sm['carState'].rightBlindspot and self.lane_change_direction == LaneChangeDirection.right))
+                            (sm['carState'].rightBlindspot and self.lane_change_direction == LaneChangeDirection.right) or
+                            (sm['carState'].genericToggle))
 
       lane_change_prob = self.LP.l_lane_change_prob + self.LP.r_lane_change_prob
 
